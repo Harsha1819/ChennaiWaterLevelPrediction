@@ -32,7 +32,7 @@ def predict_water_level(pondi, cholavaram, redhills, chembarambakkam):
 def main():
 
 
-    menu = ['Home', 'Chennai Water Level','Predict']
+    menu = ['Home', 'Chennai Water Level']
     choice = st.sidebar.selectbox('Select an option', menu)
 
     if choice == 'Home':
