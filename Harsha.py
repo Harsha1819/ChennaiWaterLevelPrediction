@@ -15,7 +15,7 @@ df = pd.read_excel("RainfallandWaterLevel.xlsx")
 df['Date'] = pd.to_datetime(df['Date'])
 
 a = df['Date'].map(pd.Timestamp.to_julian_date).values.reshape(-1, 1)
-b = df['Water_Level'].values
+b = df['Total_Water_Level'].values
 
 model = LinearRegression()
 model.fit(a,b)
