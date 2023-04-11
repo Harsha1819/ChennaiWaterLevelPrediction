@@ -8,6 +8,7 @@ from matplotlib.figure import Figure
 import numpy as np
 from sklearn.linear_model import LinearRegression
 from datetime import datetime
+from statsmodels.tsa.arima.model import ARIMA
 
 # Load the data
 df = pd.read_excel("RainfallandWaterLevel.xlsx")
