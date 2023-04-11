@@ -12,13 +12,6 @@ from datetime import datetime
 # Load the data
 df = pd.read_excel("RainfallandWaterLevel.xlsx")
 
-df['Date'] = pd.to_datetime(df['Date'])
-
-a = df['Date'].map(pd.Timestamp.to_julian_date).values.reshape(-1, 1)
-b = df['Total_Water_Level'].values
-
-model = LinearRegression()
-model.fit(a,b)
 
 
 # Define the features and target
@@ -33,11 +26,6 @@ model.fit(X, y)
 Model = pickle.load(open('Model.pkl', 'rb'))
 
 
-def predict_date(date):
-    d = np.array([date])
-    d = pd.to_datetime(d, infer_datetime_format=True)
-    val = Model.predict(d.values.reshape(-1, 1))
-    return val[0]
 
 def predict():
 
@@ -67,15 +55,6 @@ def main():
     if choice == 'Home':
         st.header('Welcome to the Rainfall and Water Level Prediction app!')
         st.write('This app uses a trained model to predict the water level for a given date on the historical data.')
-
-
-    elif choice == 'Predict':
-        st.title('Water Level Prediction')
-        st.write('Enter a date to predict water level:')
-        date_input = st.date_input('Date', value=pd.to_datetime('2023-04-11'), min_value=df['Date'].min(), max_value=df['Date'].max())
-        predicted_water_level = model.predict([[date_input.to_julian_date()]])[0]
-        st.write(f'Predicted Water Level: {predicted_water_level}')
-
        
     elif choice == "Chennai Water Level":
         # Create the Streamlit app
