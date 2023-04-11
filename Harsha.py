@@ -64,8 +64,12 @@ def main():
 
 
     elif choice == 'Predict':
-        st.header('Water Level Prediction')
-        predict()
+        st.subheader('Prediction')
+        st.write('Enter the date for prediction:')
+        date = st.date_input('Date')
+        if st.button('Predict'):
+            pred = predict(date)
+            st.success(f'Predicted Water Level: {pred}')
        
     elif choice == "Chennai Water Level":
         # Create the Streamlit app
