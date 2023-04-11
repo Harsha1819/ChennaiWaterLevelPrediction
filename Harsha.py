@@ -7,8 +7,6 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 import numpy as np
 from sklearn.linear_model import LinearRegression
-from datetime import datetime
-from statsmodels.tsa.arima.model import ARIMA
 
 # Load the data
 df = pd.read_excel("RainfallandWaterLevel.xlsx")
@@ -26,29 +24,6 @@ model.fit(X, y)
 
 Model = pickle.load(open('Model.pkl', 'rb'))
 
-
-# Convert date column to datetime object
-df['Date'] = pd.to_datetime(df['Date'])
-
-# Set the date column as index
-df.set_index('Date', inplace=True)
-
-# Resample the data to monthly frequency
-data = df.resample('M').mean()
-
-# Split the data into train and test sets
-train_data = df.iloc[:len(data)-12]
-test_data = df.iloc[len(data)-12:]
-
-# Define ARIMA model
-model = ARIMA(train_data, order=(1, 1, 1)) # Example order=(p, d, q) values
-
-
-# Fit the ARIMA model
-model_fit = model.fit()
-
-
-
 # Define the function for making predictions
 def predict_water_level(pondi, cholavaram, redhills, chembarambakkam):
     water_level = model.predict([[pondi, cholavaram, redhills, chembarambakkam]])
@@ -64,17 +39,6 @@ def main():
         st.header('Welcome to the Rainfall and Water Level Prediction app!')
         st.write('This app uses a trained model to predict the water level for a given date on the historical data.')
         
-                
-    elif choice == 'Predict':
-        st.title('Chennai Water Level Prediction')
-        st.write('Water level forecast using ARIMA.')
-        date_input = st.date_input('Select a Date for Water Level Prediction:', value=pd.to_datetime('2023-05-01'))
-        date_input = pd.to_datetime(date_input).to_period('M')
-        if date_input in test_data.index:
-            forecasted_water_level = model_fit.forecast(steps=1).loc[date_input]
-            st.write(f'**Water Level Prediction for {date_input}:** {forecasted_water_level[0]:.2f} meters')
-        else:
-            st.warning('Please select a valid date within the test data range.')
        
     elif choice == "Chennai Water Level":
         # Create the Streamlit app
