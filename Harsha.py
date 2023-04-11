@@ -24,7 +24,7 @@ model.fit(X, y)
 Model = pickle.load(open('Model.pkl', 'rb'))
 
 
-def predict_date(date):
+def date(date):
     d = np.array([date])
     d = pd.to_datetime(d, infer_datetime_format=True)
     val = Model.predict(d.values.reshape(-1, 1))
@@ -68,7 +68,7 @@ def main():
         st.write('Enter the date for prediction:')
         date = st.date_input('Date')
         if st.button('Predict'):
-            pred = predict_date(date)
+            pred = date(date)
             st.success(f'Predicted Water Level: {pred}')
        
     elif choice == "Chennai Water Level":
