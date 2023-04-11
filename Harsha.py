@@ -24,18 +24,23 @@ model.fit(X, y)
 Model = pickle.load(open('Model.pkl', 'rb'))
 
 
+def predict(date):
+    d = np.array([date])
+    d = pd.to_datetime(d, infer_datetime_format=True)
+    val = Model.predict(d.values.reshape(-1, 1))
+    return val[0]
+
 def predict():
 
     st.title("Total Water Level Prediction")
     date_str = st.text_input("Enter date (yyyy-mm-dd):", "")
-    date = datetime.strptime(date_str, "%Y-%m-%d") if date_str else None
-
-# If date is provided, predict total water level
-if date:
-    # Convert date to numerical features for prediction
-    year = date.year
-    month = date.month
-    day = date.day
+    date = datetime.strptime(date_str, "%Y-%m-%d") 
+    if date_str
+    else None
+    if date:
+        year = date.year
+        month = date.month
+        day = date.day
 
     # Call the machine learning model to predict the total water level
     total_water_level = model.predict([[year, month, day]])
