@@ -35,12 +35,6 @@ def predict():
     st.title("Total Water Level Prediction")
     date_str = st.text_input("Enter date (yyyy-mm-dd):", "")
     date = datetime.strptime(date_str, "%Y-%m-%d") 
-    if date_str
-    else None
-    if date:
-        year = date.year
-        month = date.month
-        day = date.day
 
     # Call the machine learning model to predict the total water level
     total_water_level = model.predict([[year, month, day]])
