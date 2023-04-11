@@ -12,10 +12,10 @@ from datetime import datetime
 # Load the data
 df = pd.read_excel("RainfallandWaterLevel.xlsx")
 
-data['Date'] = pd.to_datetime(data['Date'])
+df['Date'] = pd.to_datetime(df['Date'])
 
-a = data['Date'].map(pd.Timestamp.to_julian_date).values.reshape(-1, 1)
-b = data['Water_Level'].values
+a = df['Date'].map(pd.Timestamp.to_julian_date).values.reshape(-1, 1)
+b = df['Water_Level'].values
 
 model = LinearRegression()
 model.fit(a,b)
@@ -72,7 +72,7 @@ def main():
     elif choice == 'Predict':
         st.title('Water Level Prediction')
         st.write('Enter a date to predict water level:')
-        date_input = st.date_input('Date', value=pd.to_datetime('2023-04-11'), min_value=data['Date'].min(), max_value=data['Date'].max())
+        date_input = st.date_input('Date', value=pd.to_datetime('2023-04-11'), min_value=df['Date'].min(), max_value=df['Date'].max())
         predicted_water_level = model.predict([[date_input.to_julian_date()]])[0]
         st.write(f'Predicted Water Level: {predicted_water_level}')
 
