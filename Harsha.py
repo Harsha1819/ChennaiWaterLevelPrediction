@@ -26,6 +26,24 @@ model.fit(X, y)
 Model = pickle.load(open('Model.pkl', 'rb'))
 
 
+# Convert date column to datetime object
+df['Date'] = pd.to_datetime(df['Date'])
+
+# Set the date column as index
+df.set_index('Date', inplace=True)
+
+# Resample the data to monthly frequency
+data = df.resample('M').mean()
+
+# Split the data into train and test sets
+train_data = df.iloc[:len(data)-12]
+test_data = df.iloc[len(data)-12:]
+
+# Define ARIMA model
+model = ARIMA(train_data, order=(1, 1, 1)) # Example order=(p, d, q) values
+
+# Fit the ARIMA model
+model_fit = model.fit()
 
 def predict():
 
