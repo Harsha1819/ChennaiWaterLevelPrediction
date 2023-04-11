@@ -10,7 +10,7 @@ from sklearn.linear_model import LinearRegression
 from datetime import datetime
 
 # Load the data
-df = pd.read_excel(r"C:\Users\harsh\RainfallandWaterLevel.xlsx")
+df = pd.read_excel("RainfallandWaterLevel.xlsx")
 
 # Define the features and target
 X = df[['POONDI', 'CHOLAVARAM', 'REDHILLS', 'CHEMBARAMBAKKAM']].values
@@ -21,7 +21,7 @@ model = LinearRegression()
 model.fit(X, y)
 
 
-Model = pickle.load(open(r'C:\Users\harsh/Model.pkl', 'rb'))
+Model = pickle.load(open('Model.pkl', 'rb'))
 
 
 def predict():
