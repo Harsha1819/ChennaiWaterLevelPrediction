@@ -24,7 +24,7 @@ model.fit(X, y)
 Model = pickle.load(open('Model.pkl', 'rb'))
 
 
-def date(date):
+def predict_date(date):
     d = np.array([date])
     d = pd.to_datetime(d, infer_datetime_format=True)
     val = Model.predict(d.values.reshape(-1, 1))
@@ -42,9 +42,6 @@ def predict():
     # Display the predicted total water level
     st.success(f"Predicted total water level for {date_str}: {total_water_level[0]}")
 
-
-plt.rcParams["figure.figsize"] = [12, 6]
-plt.rcParams["figure.autolayout"] = True
 
 
 # Define the function for making predictions
@@ -68,7 +65,7 @@ def main():
         st.write('Enter the date for prediction:')
         date = st.date_input('Date')
         if st.button('Predict'):
-            pred = date(date)
+            pred = predict_date(date)
             st.success(f'Predicted Water Level: {pred}')
        
     elif choice == "Chennai Water Level":
