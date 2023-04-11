@@ -62,6 +62,18 @@ def main():
     if choice == 'Home':
         st.header('Welcome to the Rainfall and Water Level Prediction app!')
         st.write('This app uses a trained model to predict the water level for a given date on the historical data.')
+        
+                
+    elif choice == 'Predict':
+        st.title('Chennai Water Level Prediction')
+        st.write('Water level forecast using ARIMA.')
+        date_input = st.date_input('Select a Date for Water Level Prediction:', value=pd.to_datetime('2023-05-01'))
+        date_input = pd.to_datetime(date_input).to_period('M')
+        if date_input in test_data.index:
+            forecasted_water_level = model_fit.forecast(steps=1).loc[date_input]
+            st.write(f'**Water Level Prediction for {date_input}:** {forecasted_water_level[0]:.2f} meters')
+        else:
+            st.warning('Please select a valid date within the test data range.')
        
     elif choice == "Chennai Water Level":
         # Create the Streamlit app
@@ -76,20 +88,6 @@ def main():
         # Make the prediction and display the result
         water_level = predict_water_level(pondi_level, cholavaram_level, redhills_level, chembarambakkam_level)
         st.write('The predicted water level for Chennai is:', water_level)
-        
-     elif choice == "Predict":
-        st.title('Chennai Water Level Prediction')
-        st.write('Water level forecast using ARIMA.')
-        date_input = st.date_input('Select a Date for Water Level Prediction:', value=pd.to_datetime('2023-05-01'))
-        date_input = pd.to_datetime(date_input).to_period('M')
-        if date_input in test_data.index:
-            forecasted_water_level = model_fit.forecast(steps=1).loc[date_input]
-            st.write(f'**Water Level Prediction for {date_input}:** {forecasted_water_level[0]:.2f} meters')
-            
-        else:
-            st.warning('Please select a valid date within the test data range.')
-
-
 
 if __name__ == '__main__':
     main()
