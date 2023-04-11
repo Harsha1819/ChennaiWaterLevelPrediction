@@ -70,11 +70,11 @@ def main():
 
 
     elif choice == 'Predict':
-    st.title('Water Level Prediction')
-    st.write('Enter a date to predict water level:')
-    date_input = st.date_input('Date', value=pd.to_datetime('2023-04-11'), min_value=data['Date'].min(), max_value=data['Date'].max())
-    predicted_water_level = model.predict([[date_input.to_julian_date()]])[0]
-    st.write(f'Predicted Water Level: {predicted_water_level}')
+        st.title('Water Level Prediction')
+        st.write('Enter a date to predict water level:')
+        date_input = st.date_input('Date', value=pd.to_datetime('2023-04-11'), min_value=data['Date'].min(), max_value=data['Date'].max())
+        predicted_water_level = model.predict([[date_input.to_julian_date()]])[0]
+        st.write(f'Predicted Water Level: {predicted_water_level}')
 
        
     elif choice == "Chennai Water Level":
