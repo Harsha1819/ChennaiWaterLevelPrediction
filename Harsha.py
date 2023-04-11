@@ -27,11 +27,8 @@ Model = pickle.load(open('Model.pkl', 'rb'))
 def predict():
 
     st.title("Total Water Level Prediction")
-    
-date_str = st.text_input("Enter date (yyyy-mm-dd):", "")
-
-# Convert date input to datetime object
-date = datetime.strptime(date_str, "%Y-%m-%d") if date_str else None
+    date_str = st.text_input("Enter date (yyyy-mm-dd):", "")
+    date = datetime.strptime(date_str, "%Y-%m-%d") if date_str else None
 
 # If date is provided, predict total water level
 if date:
