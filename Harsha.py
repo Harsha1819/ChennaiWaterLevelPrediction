@@ -77,7 +77,7 @@ def main():
         water_level = predict_water_level(pondi_level, cholavaram_level, redhills_level, chembarambakkam_level)
         st.write('The predicted water level for Chennai is:', water_level)
         
-     elif choice == "Prediction":
+     elif choice == "Predict":
         st.title('Chennai Water Level Prediction')
         st.write('Water level forecast using ARIMA.')
         date_input = st.date_input('Select a Date for Water Level Prediction:', value=pd.to_datetime('2023-05-01'))
