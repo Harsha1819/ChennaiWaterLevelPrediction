@@ -52,7 +52,7 @@ def main():
 
         # Make the prediction and display the result
         water_level = int(predict_water_level(pondi_level, cholavaram_level, redhills_level, chembarambakkam_level))
-        st.write('The predicted water level for Chennai is:', water_level)
+        st.write('The predicted water level for Chennai is:{.0f}', water_level+"liters")
 
 if __name__ == '__main__':
     main()
