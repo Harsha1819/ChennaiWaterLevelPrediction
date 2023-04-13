@@ -51,7 +51,7 @@ def main():
         chembarambakkam_level = st.slider('Chembarambakkam Reservoir Level', 0, 5000, 1000)
 
         # Make the prediction and display the result
-        water_level = predict_water_level(pondi_level, cholavaram_level, redhills_level, chembarambakkam_level)
+        water_level = int(predict_water_level(pondi_level, cholavaram_level, redhills_level, chembarambakkam_level))
         st.write('The predicted water level for Chennai is:', water_level)
 
 if __name__ == '__main__':
